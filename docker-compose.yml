@@ -1,0 +1,21 @@
+version: '3'
+
+services:
+  api:
+    build: .
+    environment:
+      - NODE_ENV=production
+      - PORT=$PORT
+      - TARGET_DB_SERVER=$TARGET_DB_SERVER
+      - TARGET_DB_PORT=$TARGET_DB_PORT
+      - TARGET_DB_DATABASE=$TARGET_DB_DATABASE
+      - TARGET_DB_USER=$TARGET_DB_USER
+      - TARGET_DB_PASSWORD=$TARGET_DB_PASSWORD
+      - TARGET_DB_ENCRYPT=$TARGET_DB_ENCRYPT
+      - CSV_FOLDER=$CSV_FOLDER
+      - HOST_CSV_FOLDER=$HOST_CSV_FOLDER
+    ports:
+      - $PORT:$PORT
+    restart: always
+    volumes:
+      - $HOST_CSV_FOLDER:$CSV_FOLDER

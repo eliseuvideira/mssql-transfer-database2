@@ -1,0 +1,294 @@
+components:
+  schemas:
+    Error:
+      type: object
+      properties:
+        message:
+          type: string
+          example: Internal server error
+      required:
+        - message
+
+    Column:
+      type: object
+      properties:
+        schema:
+          type: string
+          example: hr
+        table:
+          type: string
+          example: employees
+        column:
+          type: string
+          example: employeeId
+        columnId:
+          type: number
+          example: 1
+        type:
+          type: string
+          example: INT
+        maxLength:
+          type: number
+          example: 8
+        precision:
+          type: number
+          example: 10
+        scale:
+          type: number
+          example: 6
+        isNullable:
+          type: boolean
+          example: false
+        isIdentity:
+          type: boolean
+          example: true
+        seed:
+          type: [number, 'null']
+          example: 120
+        increment:
+          type: [number, 'null']
+          example: 1
+        isPrimaryKey:
+          type: boolean
+          example: true
+        primaryKeyId:
+          type: [number, 'null']
+          example: 1
+      required:
+        - schema
+        - table
+        - column
+        - columnId
+        - type
+        - maxLength
+        - precision
+        - scale
+        - isNullable
+        - isIdentity
+        - seed
+        - increment
+        - isPrimaryKey
+        - primaryKeyId
+
+    Schema:
+      type: object
+      properties:
+        schema:
+          type: string
+          example: hr
+      required:
+        - schema
+
+    Table:
+      type: object
+      properties:
+        schema:
+          type: string
+          example: hr
+        table:
+          type: string
+          example: employees
+        columns:
+          type: array
+          items:
+            type: Column
+      required:
+        - schema
+        - table
+        - columns
+
+    Module:
+      type: object
+      properties:
+        module:
+          type: string
+          example: fn_unaccent
+        definition:
+          type: string
+          example: CREATE FUNCTION ...
+      required:
+        - module
+        - definition
+
+    Constraint:
+      type: object
+      propertie:
+        schema:
+          type: string
+          example: hr
+        table:
+          type: string
+          example: employees
+        constraint:
+          type: string
+          example: ck_employees_age
+        definition:
+          type: string
+          example: ALTER TABLE ...
+      required:
+        - schema
+        - table
+        - constraint
+        - definition
+
+    Default:
+      type: object
+      properties:
+        schema:
+          type: string
+          example: hr
+        table:
+          type: string
+          example: employees
+        column:
+          type: string
+          example: sex
+        default:
+          type: string
+          example: male
+        definition:
+          type: string
+          example: ALTER TABLE ...
+      required:
+        - schema
+        - table
+        - column
+        - default
+        - definition
+
+    ForeignKeyColumn:
+      type: object
+      properties:
+        foreignKey:
+          type: string
+          example: fk_employees_manager_id
+        schema:
+          type: string
+          example: hr
+        table:
+          type: string
+          example: employees
+        column:
+          type: string
+          example: managerId
+        referencedSchema:
+          type: string
+          example: hr
+        referencedTable:
+          type: string
+          example: employees
+        referencedColumn:
+          type: string
+          example: employeeId
+      required:
+        - schema
+        - table
+        - column
+        - referencedSchema
+        - referencedTable
+        - referencedColumn
+
+    ForeignKey:
+      type: object
+      properties:
+        schema:
+          type: string
+          example: hr
+        table:
+          type: string
+          example: employees
+        referencedSchema:
+          type: string
+          example: hr
+        referencedTable:
+          type: string
+          example: employees
+        foreignKey:
+          type: string
+          example: fk_employees_manager_id
+        columns:
+          type: array
+          items:
+            type: ForeignKeyColumn
+      required:
+        - schema
+        - table
+        - referencedSchema
+        - referencedTable
+        - foreignKey
+        - columns
+
+    IndexColumn:
+      type: object
+      properties:
+        schema:
+          type: string
+          example: hr
+        table:
+          type: string
+          example: employees
+        index:
+          type: string
+          example: idx_employees_name
+        column:
+          type: string
+          example: name
+        isDescendingKey:
+          type: boolean
+          example: false
+        isIncludedColumn:
+          type: boolean
+          example: false
+      required:
+        - schema
+        - table
+        - index
+        - column
+        - isDescendingKey
+        - isIncludedColumn
+
+    Index:
+      type: object
+      properties:
+        index:
+          type: string
+          example: idx_employees_name
+        schema:
+          type: string
+          example: hr
+        table:
+          type: string
+          example: employees
+        type:
+          type: string
+          example: NONCLUSTERED
+        isUnique:
+          type: boolean
+          example: false
+        isPrimaryKey:
+          type: boolean
+          example: false
+        isUniqueConstraint:
+          type: boolean
+          example: false
+        hasFilter:
+          type: boolean
+          example: false
+        filterDefinition:
+          type: [boolean, 'null']
+          example: null
+        columns:
+          type: array
+          items:
+            type: IndexColumn
+      required:
+        - index
+        - schema
+        - table
+        - type
+        - isUnique
+        - isPrimaryKey
+        - isUniqueConstraint
+        - hasFilter
+        - filterDefinition
+        - columns
